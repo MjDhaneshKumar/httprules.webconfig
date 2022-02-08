@@ -1,0 +1,30 @@
+
+
+====================================================================================================================
+
+
+<rule name="RedirectNonWwwToWww" stopProcessing="true">
+  <match url="(.*)" />
+  <conditions>
+    <add input="{HTTP_HOST}" pattern="^site.com$" />
+  </conditions>
+  <action type="Redirect" url="https://www.site.com/{R:0}" redirectType="Permanent or Temporary" />
+</rule>
+
+
+
+
+
+====================================================================================================================
+
+
+
+<rule name="Http_TO_Redirect_for_HTTPS" stopProcessing="true">
+          <match url="(.*)" ignoreCase="false" />
+          <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+            <add input="{HTTPS}" pattern="off" />
+            <add input="{HTTP_HOST}" pattern="^(?:www\.)?site.com/(\/?)$" negate="true" ignoreCase="false" />
+          </conditions>
+          <action type="Redirect" url="https://www.site.com/" redirectType="Temporary" />
+        </rule>
+    
